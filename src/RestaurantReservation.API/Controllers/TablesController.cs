@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿// File: src/RestaurantReservation.API/Controllers/TablesController.cs
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RestaurantReservation.Application.DTOs.Table;
 using RestaurantReservation.Application.DTOs.Common;
 using RestaurantReservation.Application.Interfaces;
@@ -8,6 +10,7 @@ namespace RestaurantReservation.API.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 [Produces("application/json")]
+[Authorize] // Require authentication
 public class TablesController : ControllerBase
 {
     private readonly ITableService _tableService;
@@ -181,9 +184,10 @@ public class TablesController : ControllerBase
     }
 
     /// <summary>
-    /// Create a new table
+    /// Create a new table (Admin/Staff only)
     /// </summary>
     [HttpPost]
+    [Authorize(Roles = "Admin,Staff")]
     [ProducesResponseType(typeof(ApiResponse<TableDto>), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<ApiResponse<TableDto>>> CreateTable(

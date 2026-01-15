@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿// File: src/RestaurantReservation.API/Controllers/CustomersController.cs
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RestaurantReservation.Application.DTOs.Customer;
 using RestaurantReservation.Application.DTOs.Common;
 using RestaurantReservation.Application.Interfaces;
@@ -8,6 +10,7 @@ namespace RestaurantReservation.API.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 [Produces("application/json")]
+[Authorize] // Require authentication for all endpoints
 public class CustomersController : ControllerBase
 {
     private readonly ICustomerService _customerService;
@@ -22,9 +25,10 @@ public class CustomersController : ControllerBase
     }
 
     /// <summary>
-    /// Get all customers with pagination and optional search
+    /// Get all customers with pagination and optional search (Admin/Staff only)
     /// </summary>
     [HttpGet]
+    [Authorize(Roles = "Admin,Staff")]
     [ProducesResponseType(typeof(ApiResponse<PagedResult<CustomerDto>>), StatusCodes.Status200OK)]
     public async Task<ActionResult<ApiResponse<PagedResult<CustomerDto>>>> GetAllCustomers(
         [FromQuery] int pageNumber = 1,

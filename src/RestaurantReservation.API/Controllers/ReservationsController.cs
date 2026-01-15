@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿// File: src/RestaurantReservation.API/Controllers/ReservationsController.cs
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RestaurantReservation.Application.DTOs.Reservation;
 using RestaurantReservation.Application.DTOs.Common;
 using RestaurantReservation.Application.Interfaces;
@@ -8,6 +10,7 @@ namespace RestaurantReservation.API.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 [Produces("application/json")]
+[Authorize] // Require authentication
 public class ReservationsController : ControllerBase
 {
     private readonly IReservationService _reservationService;

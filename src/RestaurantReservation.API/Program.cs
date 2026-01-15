@@ -1,3 +1,4 @@
+// File: src/RestaurantReservation.API/Program.cs
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -21,11 +22,14 @@ builder.Services.AddDbContext<RestaurantDbContext>(options =>
 builder.Services.AddScoped<RestaurantReservation.Domain.Interfaces.ICustomerRepository, RestaurantReservation.Infrastructure.Repositories.CustomerRepository>();
 builder.Services.AddScoped<RestaurantReservation.Domain.Interfaces.ITableRepository, RestaurantReservation.Infrastructure.Repositories.TableRepository>();
 builder.Services.AddScoped<RestaurantReservation.Domain.Interfaces.IReservationRepository, RestaurantReservation.Infrastructure.Repositories.ReservationRepository>();
+builder.Services.AddScoped<RestaurantReservation.Domain.Interfaces.IUserRepository, RestaurantReservation.Infrastructure.Repositories.UserRepository>();
 
 // Register Services
 builder.Services.AddScoped<RestaurantReservation.Application.Interfaces.ICustomerService, RestaurantReservation.Application.Services.CustomerService>();
 builder.Services.AddScoped<RestaurantReservation.Application.Interfaces.ITableService, RestaurantReservation.Application.Services.TableService>();
 builder.Services.AddScoped<RestaurantReservation.Application.Interfaces.IReservationService, RestaurantReservation.Application.Services.ReservationService>();
+builder.Services.AddScoped<RestaurantReservation.Application.Interfaces.IJwtService, RestaurantReservation.Application.Services.JwtService>();
+builder.Services.AddScoped<RestaurantReservation.Application.Interfaces.IAuthService, RestaurantReservation.Application.Services.AuthService>();
 
 // Configure JWT Authentication
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
