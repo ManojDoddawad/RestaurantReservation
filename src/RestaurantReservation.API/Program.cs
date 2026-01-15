@@ -23,6 +23,8 @@ builder.Services.AddScoped<RestaurantReservation.Domain.Interfaces.ICustomerRepo
 builder.Services.AddScoped<RestaurantReservation.Domain.Interfaces.ITableRepository, RestaurantReservation.Infrastructure.Repositories.TableRepository>();
 builder.Services.AddScoped<RestaurantReservation.Domain.Interfaces.IReservationRepository, RestaurantReservation.Infrastructure.Repositories.ReservationRepository>();
 builder.Services.AddScoped<RestaurantReservation.Domain.Interfaces.IUserRepository, RestaurantReservation.Infrastructure.Repositories.UserRepository>();
+builder.Services.AddScoped<RestaurantReservation.Domain.Interfaces.IMenuCategoryRepository, RestaurantReservation.Infrastructure.Repositories.MenuCategoryRepository>();
+builder.Services.AddScoped<RestaurantReservation.Domain.Interfaces.IMenuItemRepository, RestaurantReservation.Infrastructure.Repositories.MenuItemRepository>();
 
 // Register Services
 builder.Services.AddScoped<RestaurantReservation.Application.Interfaces.ICustomerService, RestaurantReservation.Application.Services.CustomerService>();
@@ -30,6 +32,7 @@ builder.Services.AddScoped<RestaurantReservation.Application.Interfaces.ITableSe
 builder.Services.AddScoped<RestaurantReservation.Application.Interfaces.IReservationService, RestaurantReservation.Application.Services.ReservationService>();
 builder.Services.AddScoped<RestaurantReservation.Application.Interfaces.IJwtService, RestaurantReservation.Application.Services.JwtService>();
 builder.Services.AddScoped<RestaurantReservation.Application.Interfaces.IAuthService, RestaurantReservation.Application.Services.AuthService>();
+builder.Services.AddScoped<RestaurantReservation.Application.Interfaces.IMenuService, RestaurantReservation.Application.Services.MenuService>();
 
 // Configure JWT Authentication
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
