@@ -122,4 +122,13 @@ public class TableRepository : GenericRepository<Table>, ITableRepository
             .Include(t => t.Reservations)
             .FirstOrDefaultAsync(t => t.TableId == id);
     }
+
+    public async Task<Table?> GetTableWithReservationsAsync(int tableId)
+    {
+        return await _context.Tables
+            .Include(t => t.Reservations)
+                .ThenInclude(r => r.Customer)
+            .FirstOrDefaultAsync(t => t.TableId == tableId);
+    }
+
 }

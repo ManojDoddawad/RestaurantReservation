@@ -167,7 +167,8 @@ public class TableService : ITableService
 
     public async Task<TableScheduleDto?> GetTableScheduleAsync(int tableId, DateTime date)
     {
-        var table = await _tableRepository.GetByIdAsync(tableId);
+        var table = await _tableRepository.GetTableWithReservationsAsync(tableId);
+
         if (table == null)
         {
             return null;

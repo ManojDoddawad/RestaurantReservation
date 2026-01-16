@@ -16,4 +16,6 @@ public interface ITableRepository : IGenericRepository<Table>
     Task<IEnumerable<Table>> GetTablesByCapacityAsync(int minCapacity, int? maxCapacity = null);
     Task<(IEnumerable<Table> Items, int TotalCount)> GetPagedAsync(int pageNumber, int pageSize, bool? isAvailable = null, string? location = null);
     Task<bool> IsTableAvailableAsync(int tableId, DateTime date, int duration);
+    Task<Table?> GetTableWithReservationsAsync(int tableId);
+
 }
